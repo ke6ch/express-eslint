@@ -3,6 +3,7 @@ const apicontroller = require('../app/controllers/apicontroller');
 
 const router = express.Router();
 
-router.get('/', apicontroller.index);
+router.get('/task', apicontroller.index);
+router.post('/task', apicontroller.store);
 
 module.exports = router;
