@@ -8,10 +8,22 @@ export default class App extends React.Component {
   };
 
   handleSubmit = task => {
-    this.setState({ tasks: [...this.state.tasks, task] });
+    let url = 'http://localhost:3000/api/v1/task';
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(task)
+    }).then(response => {
+      return response.json();
+    }).then(data => {
+      this.setState({ tasks: data });
+    });
   }
 
-//  handleSearch = () => {
   componentDidMount = () => {
     let url = 'http://localhost:3000/api/v1/task';
 
