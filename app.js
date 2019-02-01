@@ -14,7 +14,10 @@ var apiRouter = require('./routes/api');
 // setup mongoose connection
 var mongoDB = 'mongodb://localhost/mongo';
 
-mongoose.connect(mongoDB)
+mongoose.connect(mongoDB, { 
+  useCreateIndex: true,
+  useNewUrlParser: true
+})
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 mongoose.Promise = global.Promise;
