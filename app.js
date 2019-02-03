@@ -18,7 +18,7 @@ mongoose.connect(mongoDB, {
   useCreateIndex: true,
   useNewUrlParser: true
 })
-  .then(() =>  console.log('connection succesful'))
+  .then(() =>  console.log('MongoDB connection succesful'))
   .catch((err) => console.error(err));
 mongoose.Promise = global.Promise;
 
