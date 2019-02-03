@@ -5,4 +5,4 @@ log4js.configure({
   categories: { default: { appenders: ['system'], level: 'debug' } }
 });
 
-const logger = log4js.getLogger('system');
+const logger = log4js.getLogger();
