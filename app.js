@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var logger = require('morgan');
+var log4js = require('./config/log4js');
 var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
@@ -14,8 +14,11 @@ var apiRouter = require('./routes/api');
 // setup mongoose connection
 var mongoDB = 'mongodb://localhost/mongo';
 
-mongoose.connect(mongoDB)
-  .then(() =>  console.log('connection succesful'))
+mongoose.connect(mongoDB, { 
+  useCreateIndex: true,
+  useNewUrlParser: true
+})
+  .then(() =>  console.log('MongoDB connection succesful'))
   .catch((err) => console.error(err));
 mongoose.Promise = global.Promise;
 
@@ -29,7 +32,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

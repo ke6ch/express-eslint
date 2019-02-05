@@ -14,7 +14,7 @@ export default class List extends React.Component {
       let rowindex = `TableRow-${index}`;
 
       return ( 
-        <TableRow id={rowindex}>
+        <TableRow key={rowindex}>
           <TableCell>{row.task}</TableCell>
           <TableCell>{row.date}</TableCell>
           <TableCell><Checkbox /></TableCell>
