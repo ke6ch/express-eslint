@@ -4,8 +4,8 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('oganesson:server');
+var app = require('./app');
+var debug = require('debug')('express-eslint:server');
 var http = require('http');
 
 /**

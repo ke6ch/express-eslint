@@ -1,17 +1,19 @@
-const { check, validationResult } = require('express-validator/check');
-const Task = require('../models/task');
+const { check, validationResult } = require("express-validator/check");
+const logger = require("../../config/logger");
+const Task = require("../models/task");
 
 // Validate
 exports.validate = () => {
   return [
-    check('task', 'task is required').not().exists(),
+    check("task", "task is required")
+      .not()
+      .exists()
   ];
 };
 
 // GET task
 exports.index = (req, res) => {
   Task.find({}, null, { sort: { date: 1 } }, (err, data) => {
-    console.log(data);
     res.json(data);
   });
 };
@@ -21,24 +23,37 @@ exports.store = (req, res) => {
   // Error Handling
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    //return res.status(422).json({ errors: errors.array() });
-    return res.status(404).json({ errors: errors(msg) });
+    return res.status(422).json({ errors: errors.array() });
   }
 
   let reqDate;
 
-  if (req.body.date !== '') {
+  if (req.body.date !== "") {
     reqDate = req.body.date;
   }
 
   const task = new Task({
     task: req.body.task,
     date: reqDate,
-    status: true,
+    status: true
   });
 
-  task.save((e) => {
+  task.save(e => {
     if (e) {
+      logger.system.error(e);
+      return next(e);
+    }
+    Task.find({}, null, { sort: { date: 1 } }, (err, data) => {
+      res.json(data);
+    });
+  });
+};
+
+// DELETE task
+exports.destroy = (req, res) => {
+  Task.remove({ _id: req.params.name }, (err, data) => {
+    if (e) {
+      logger.system.error(e);
       return next(e);
     }
     Task.find({}, null, { sort: { date: 1 } }, (err, data) => {
