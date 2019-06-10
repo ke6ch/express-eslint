@@ -6,7 +6,6 @@ const Task = require("../models/task");
 exports.validate = () => {
   return [
     check("task", "task is required")
-      .not()
       .exists()
   ];
 };
@@ -19,7 +18,7 @@ exports.index = (req, res) => {
 };
 
 // POST task
-exports.store = (req, res) => {
+exports.store = (req, res, next) => {
   // Error Handling
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -40,6 +39,7 @@ exports.store = (req, res) => {
 
   task.save(e => {
     if (e) {
+console.log(e);
       logger.system.error(e);
       return next(e);
     }
@@ -50,7 +50,7 @@ exports.store = (req, res) => {
 };
 
 // DELETE task
-exports.destroy = (req, res) => {
+exports.destroy = (req, res, next) => {
   Task.remove({ _id: req.params.name }, (err, data) => {
     if (e) {
       logger.system.error(e);
