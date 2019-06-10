@@ -1,6 +1,6 @@
-const logger = require('log4js').getLogger();
+const logger = require("../../config/logger");
 
 // GET index
-exports.index = function (req, res) {
-  res.render('tasks');
+exports.index = (req, res) => {
+  res.render("tasks");
 };
