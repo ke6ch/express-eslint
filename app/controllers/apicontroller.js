@@ -39,7 +39,6 @@ exports.store = (req, res, next) => {
 
   task.save(e => {
     if (e) {
-console.log(e);
       logger.system.error(e);
       return next(e);
     }
