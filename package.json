@@ -20,7 +20,7 @@
     "http-errors": "~1.7.3",
     "log4js": "^5.1.0",
     "mongo": "^0.1.0",
-    "mongoose": "^5.4.1"
+    "mongoose": "^5.7.5"
   },
   "devDependencies": {
     "eslint": "^6.2.2",
